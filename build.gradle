@@ -1,0 +1,32 @@
+plugins {
+  id "org.springframework.boot" version "2.1.2.RELEASE"
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.anodyzed.boot'
+def applicationName = 'user'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  runtimeOnly 'com.h2database:h2'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootJar {
+  archiveName = "${applicationName}-${version}.jar".toString()
+  mainClassName = 'com.anodyzed.boot.user.UserApplication'
+  
+  from('client/src/main/resources') {
+    into 'static'
+  }
+}

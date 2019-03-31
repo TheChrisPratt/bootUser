@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="alert alert-danger" role="alert" data-ng-if="errorMessage">{{errorMessage}}</div>
+  <div class="panel panel-default">
+    <div class="alert alert-success">
+      <span class="lead">Register New User</span>
+      <p>Please maintain uniqueness of User-Name</p>
+    </div>
+    <div class="panel-body">
+      <div class="container">
+        <form data-ng-submit="submitUserForm()" name="registrationForm" class="form-horizontal">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="username" class="col-md-2 control-label">Name</label>
+              <div class="col-md-7"><input type="text" data-ng-model="user.name" id="username" class="form-control input-sm" placeholder="User Name"/></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="address" class="col-md-2 control-label">Address</label>
+              <div class="col-md-7"><input type="text" data-ng-model="user.address" id="address" class="form-control input-sm" placeholder="User Address"/></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="email" class="col-md-2 control-label">Email</label>
+              <div class="col-md-7"><input type="email" data-ng-model="user.email" id="email" class="form-control input-sm" placehoder="User Email"/></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-actions floatRight">
+              <input type="submit" value="Register User" class="btn btn-primary btn-sm"/>
+              <input type="button" data-ng-click="resetForm()" class="btn btn-warning btn-sm">Reset Form
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

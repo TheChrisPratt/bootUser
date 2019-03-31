@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="userRegistrationSystem">
+  <head>
+    <meta charset="UTF-8">
+    <title>Full Stack User Registration System</title>
+    <link rel="stylesheet" href="/styles/app.css"/>
+  </head>
+  <body>
+    <div class="page-header text-center">
+      <h2>User Registration System</h2>
+    </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <a href="#/" class="btn btn-info navbar-btn" role="button">Home</a>
+        <a href="#/register-new-user" class="btn btn-info navbar-btn" role="button">Register New User</a>
+        <a href="#/list-all-users" class="btn btn-info" role="button">List All Users</a>
+      </div>
+    </nav>
+    <div data-ng-view></div>
+    <script src="/webjars/angularjs/1.7.7/angular.js"></script>
+    <script src="/webjars/angularjs/1.7.7/angular-resources.js"></script>
+    <script src="/webjars/angularjs/1.7.7/angular-route.js"></script>
+    <script src="/scripts/app.js"/>
+    <script src="/scripts/controller.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.css"/>
+  </body>
+</html>
