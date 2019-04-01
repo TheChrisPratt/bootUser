@@ -12,7 +12,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/client" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
@@ -27,13 +26,15 @@
     </profile>
     <version value="1.0" />
   </component>
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{angular, angular-resource, angular-route}" />
+  </component>
   <component name="ProjectCodeStyleConfiguration">
     <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default (1)" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/user.iml" filepath="$PROJECT_DIR$/user.iml" />
-      <module fileurl="file://$PROJECT_DIR$/client/user.client.iml" filepath="$PROJECT_DIR$/client/user.client.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_10" default="false" project-jdk-name="Java10" project-jdk-type="JavaSDK">

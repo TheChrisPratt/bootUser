@@ -13,6 +13,9 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="Python" name="Python">
+      <configuration sdkName="" />
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/build/classes/java/main" />
@@ -23,7 +26,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/gradle" />
       <excludeFolder url="file://$MODULE_DIR$/out" />
     </content>
     <orderEntry type="jdk" jdkName="Java8" jdkType="JavaSDK" />
