@@ -1,35 +1,30 @@
-# Angular 4 + Spring Boot + Gradle
+# AngularJS + Spring Boot + Gradle
 
-This project aims at setting up a Spring Boot Server with Angular 4 UI that can be build by gradle.
+This project aims at setting up a Spring Boot Server with AngularJS UI that can be build by gradle.
 
 ## Getting started
 
 To run the final server, build the jar:
 
 ```
-./gradlew bootRepackage
+gradle build
 ```
 
 and run the server:
 
 ```
-java -jar build/libs/spring-angular-0.0.1-SNAPSHOT.jar
+java -jar build/libs/user-0.0.1-SNAPSHOT.jar
 ```
 
-Navigate to `http://localhost:8080` to see the Angular Start Page with a custom Welcome message from the REST API.
+Navigate to `http://localhost:8888` to see the Angular Start Page with a custom Welcome message from the REST API.
 
 ## Development
 
 When developing either the Spring Boot Server for the REST API or the Angular UI, the servers can be started and developed independently. For example:
 
 ```
-Start the Spring Boot Server on http://localhost:8080
-./gradlew bootRun
-```
-
-```
-Start the Angular webpack development server on http://localhost:4200 with redirect to the REST API
-./gradlew npm_start
+Start the Spring Boot Server on http://localhost:8888
+gradle bootRun
 ```
 
 ## Set up your own
@@ -42,7 +37,7 @@ Start the Angular webpack development server on http://localhost:4200 with redir
 
 `curl https://start.spring.io/starter.tgz -d type=gradle-project -d groupId=com.segfault16 -d artifactId=spring-angular | tar -xzvf -`
 
-Check: Run the server with `./gradlew bootRun`, should start up and shut down afterwards. We'll fix that in step 2.
+Check: Run the server with `gradle bootRun`, should start up and shut down afterwards. We'll fix that in step 2.
 
 ### Step 2: Add Spring Dependencies
 
@@ -69,7 +64,6 @@ apply plugin: 'com.moowork.node'
  
 version '0.0.1'
  
-
 node {
     version = '8.9.0'
     npmVersion = '5.5.1'
