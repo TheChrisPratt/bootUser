@@ -32,13 +32,17 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @since 2019-01-25
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping(value="/api/user",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class UserResource {
   private static final Logger log = LoggerFactory.getLogger(UserResource.class);
 
   @Autowired
   private UserRepository userRepository;
+
+  private ResponseEntity error (HttpStatus status,String message) {
+    return ResponseEntity.status(status).body("{\"errorMessage\": \"" + message + "\"}");
+  } //error
 
   @GetMapping("/")
   public ResponseEntity<List<User>> list () {
@@ -48,7 +52,7 @@ public class UserResource {
   } //list
 
   @GetMapping("/{id}")
-  public ResponseEntity<User> get (@PathVariable("id") final long id) {
+  public ResponseEntity get (@PathVariable("id") final long id) {
     Optional<User> result = userRepository.findById(id);
     if(result.isPresent()) {
       User user = result.get();
@@ -56,24 +60,24 @@ public class UserResource {
       return ResponseEntity.ok(user);
     } else {
       log.warn("User with ID={} Not Found",id);
-      return ResponseEntity.notFound().build();
+      return error(HttpStatus.NOT_FOUND,"User with id " + id + " not found.");
     }
   } //get
 
   @PostMapping(value="/",consumes=MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> create (@Valid @RequestBody final User user,final UriComponentsBuilder builder) {
+  public ResponseEntity create (@Valid @RequestBody final User user,final UriComponentsBuilder builder) {
     if(userRepository.findByName(user.getName()) == null) {
       User saved = userRepository.save(user);
       UriComponents uri = builder.path("/api/user/{id}").buildAndExpand(saved.getId());
       log.info("Created User: [{}] {}",user.getId(),user.getName());
       return ResponseEntity.created(uri.toUri()).build();
     } else {
-      return ResponseEntity.status(HttpStatus.CONFLICT).build();
+      return error(HttpStatus.CONFLICT,"Unable to create new user.  A User with name " + user.getName() + " already exists.");
     }
   } //create
 
   @PutMapping(value="/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> update (@PathVariable("id") final long id,@Valid @RequestBody final User user) {
+  public ResponseEntity update (@PathVariable("id") final long id,@Valid @RequestBody final User user) {
       // fetch user based on id and set it to currentUser object of type User
     Optional<User> result = userRepository.findById(id);
     if(result.isPresent()) {
@@ -89,7 +93,7 @@ public class UserResource {
       return ResponseEntity.ok(currentUser);
     } else {
       log.warn("Unable to locate User with ID={} to update",id);
-      return ResponseEntity.notFound().build();
+      return error(HttpStatus.NOT_FOUND,"Unable to update user.  User with id " + id + " not found.");
     }
   } //update
 
