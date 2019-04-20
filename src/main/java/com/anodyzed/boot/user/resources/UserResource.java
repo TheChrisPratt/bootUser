@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,7 +65,7 @@ public class UserResource {
     }
   } //get
 
-  @PostMapping(value="/",consumes=MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping("/")
   public ResponseEntity create (@Valid @RequestBody final User user,final UriComponentsBuilder builder) {
     if(userRepository.findByName(user.getName()) == null) {
       User saved = userRepository.save(user);
@@ -76,7 +77,7 @@ public class UserResource {
     }
   } //create
 
-  @PutMapping(value="/{id}",consumes=MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping("/{id}")
   public ResponseEntity update (@PathVariable("id") final long id,@Valid @RequestBody final User user) {
       // fetch user based on id and set it to currentUser object of type User
     Optional<User> result = userRepository.findById(id);
@@ -98,6 +99,7 @@ public class UserResource {
   } //update
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasAuthority('ADMIN')")
   public ResponseEntity<User> delete (@PathVariable("id") final long id) {
     userRepository.deleteById(id);
     log.info("Deleted User: [{}]",id);

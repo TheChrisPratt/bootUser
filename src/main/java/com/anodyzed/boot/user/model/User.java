@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.Length;
  * @since 2019-01-25
  */
 @Entity
-@Table(name="Users")
+@Table(name="User")
 @SuppressWarnings({"UnusedReturnValue","unused"})
 public class User {
   private static final int NAME_MAX = 50;
