@@ -15,3 +15,7 @@ app.config(function ($routeProvider) {
     redirectTo: '/home'
   })
 });
+
+app.config(['$httpProvider',function ($httpProvider) {
+  $httpProvider.interceptors.push('AuthInterceptor');
+}]);

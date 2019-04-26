@@ -28,10 +28,7 @@ app.controller('listUserController',function ($scope,$http,$location,$route) {
   
   $http({
     method: 'GET',
-    url: USER_API_URL,
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    url: USER_API_URL
   }).then(function (response) {
     $scope.users = response.data;
   });
@@ -43,10 +40,7 @@ app.controller('listUserController',function ($scope,$http,$location,$route) {
   $scope.deleteUser = function (userId) {
     $http({
       method: 'DELETE',
-      url: USER_API_URL + userId,
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      url: USER_API_URL + userId
     }).then(function (response) {
       $location.path('/list-all-users');
       $route.reload();
@@ -61,10 +55,7 @@ app.controller('userDetailsController',function ($scope,$http,$location,$route) 
 
   $http({
     method: 'GET',
-    url: USER_API_URL + $scope.userId,
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    url: USER_API_URL + $scope.userId
   });
 
   $scope.submitUserForm = function () {

@@ -33,7 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @since 2019-01-25
  */
 @RestController
-@RequestMapping(value="/api/user",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("/api/user")
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 public class UserResource {
   private static final Logger log = LoggerFactory.getLogger(UserResource.class);
@@ -45,14 +45,14 @@ public class UserResource {
     return ResponseEntity.status(status).body("{\"errorMessage\": \"" + message + "\"}");
   } //error
 
-  @GetMapping("/")
+  @GetMapping(value="/",produces=MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<User>> list () {
     List<User> users = userRepository.findAll();
     log.info("Listing {} Users",users.size());
     return ResponseEntity.ok(users);
   } //list
 
-  @GetMapping("/{id}")
+  @GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity get (@PathVariable("id") final long id) {
     Optional<User> result = userRepository.findById(id);
     if(result.isPresent()) {
@@ -65,7 +65,7 @@ public class UserResource {
     }
   } //get
 
-  @PostMapping("/")
+  @PostMapping(value="/",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity create (@Valid @RequestBody final User user,final UriComponentsBuilder builder) {
     if(userRepository.findByName(user.getName()) == null) {
       User saved = userRepository.save(user);
@@ -77,7 +77,7 @@ public class UserResource {
     }
   } //create
 
-  @PutMapping("/{id}")
+  @PutMapping(value="/{id}",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity update (@PathVariable("id") final long id,@Valid @RequestBody final User user) {
       // fetch user based on id and set it to currentUser object of type User
     Optional<User> result = userRepository.findById(id);
