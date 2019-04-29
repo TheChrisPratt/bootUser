@@ -1,21 +1,33 @@
 var app = angular.module('userRegistrationSystem',['ngRoute','ngResource']);
 
 app.config(function ($routeProvider) {
-  $routeProvider.when('/list-all-users',{
+  $routeProvider.when('/',{
+    templateUrl: '/templates/home.html',
+    controller: 'homeController'
+  }).when('/list-all-users',{
     templateUrl: '/templates/user-list.html',
     controller: 'listUserController'
   }).when('/register-new-user',{
     templateUrl: '/templates/user-registration.html',
     controller: 'registerUserController'
-  }).when('/update-user/:id',{
+  }).when('/update-user/:id', {
     templateUrl: '/templates/user-update.html',
     controller: 'userDetailsController'
+  }).when('/login',{
+    templateUrl: '/templates/login.html',
+    controller: 'loginController'
+  }).when('/logout',{
+    templateUrl: '/templates/login.html',
+    controller: 'logoutController'
   }).otherwise({
-    templateUrl: '/templates/home.html',
-    redirectTo: '/home'
+    redirectTo: '/login'
   })
 });
 
+// app.config(['$httpProvider',function ($httpProvider) {
+//   $httpProvider.interceptors.push('AuthInterceptor');
+// }]);
+
 app.config(['$httpProvider',function ($httpProvider) {
-  $httpProvider.interceptors.push('AuthInterceptor');
+  $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }]);

@@ -177,13 +177,8 @@
   </component>
   <component name="dataSourceStorageLocal">
     <data-source name="InMemory" uuid="e1aab580-e2f9-4738-9260-e03f02ec7ac9">
-      <database-info product="H2" version="1.4.196 (2017-06-10)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.4.196 (2017-06-10)" dbms="H2" exact-version="1.4.196" exact-driver-version="1.4">
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="H2" exact-version="0" />
       <auth-required>false</auth-required>
-      <introspection-schemas>@:@</introspection-schemas>
     </data-source>
   </component>
   <component name="libraryTable">

@@ -75,3 +75,55 @@ app.controller('userDetailsController',function ($scope,$http,$location,$route) 
   }; //submitUserForm
 
 }); //*userDetailsController
+
+app.controller('homeController', function ($rootScope,$scope,$http,$location,$route) {
+  if($rootScope.authenticated) {
+    $location.path('/');
+    $scope.loginerror = false;
+  } else {
+    $location.path('/login');
+    $scope.loginerror = true;
+  }
+}); //*homeController
+
+app.controller('loginController', function ($rootScope,$scope,$http,$location,$route) {
+  $scope.credentials = {};
+  $scope.resetForm = function() {
+    $scope.credentials = null;
+  }; //resetForm
+
+  var authenticate = function (credentials, callback) {
+    var headers = $scope.credentials ? {
+      authorization : 'Basic ' + btoa($scope.credentials.username + ':' + $scope.credentials.password)
+    } : {};
+
+    $http.get('user',{headers : headers}).then(function (response) {
+      $rootScope.authenticated = !!response.data.name;
+      callback && callback();
+    }, function () {
+      $rootScope.authenticated = false;
+      callback && callback();
+    });
+  }; //authenticate
+
+  authenticate();
+
+  $scope.loginUser = function() {
+    authenticate($scope.credentials,function () {
+      if($rootScope.authenticated) {
+        $location.path('/');
+        $scope.loginerror = false;
+      } else {
+        $location.path('/login');
+        $scope.loginerror = true;
+      }
+    });
+  }; //loginUser
+}); //*loginController
+
+app.controller('logoutController',function ($rootScope,$scope,$http,$location,$route) {
+  $http.post('logout',{}).finally(function() {
+    $rootScope.authenticated = false;
+    $location.path('/');
+  });
+}); //*logoutController
