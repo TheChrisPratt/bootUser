@@ -42,7 +42,7 @@ public class DatabaseSecurityConfiguration extends WebSecurityConfigurerAdapter 
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                       .and().httpBasic().realmName("User Registration System")
                       .and().authorizeRequests()
-                            .antMatchers("/login/login.html","/template/home.html","/").permitAll()
+                            .antMatchers("/api/user/login.html","/api/user/home.html","/").permitAll()
                             .anyRequest().authenticated()
                       .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
   } //configure
