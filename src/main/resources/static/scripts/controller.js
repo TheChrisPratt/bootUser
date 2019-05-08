@@ -1,4 +1,5 @@
-var USER_API_URL = 'http://localhost:8888/api/user/'
+const AUTH_API_URL = 'http://localhost:8888/api/auth/';
+const USER_API_URL = 'http://localhost:8888/api/user/';
 
 app.controller('registerUserController',function ($scope,$http,$location,$route) {
   
@@ -97,7 +98,7 @@ app.controller('loginController', function ($rootScope,$scope,$http,$location,$r
       authorization : 'Basic ' + btoa($scope.credentials.username + ':' + $scope.credentials.password)
     } : {};
 
-    $http.get('user',{headers : headers}).then(function (response) {
+    $http.get(AUTH_API_URL + 'user',{headers : headers}).then(function (response) {
       $rootScope.authenticated = !!response.data.name;
       callback && callback();
     }, function () {
@@ -122,7 +123,7 @@ app.controller('loginController', function ($rootScope,$scope,$http,$location,$r
 }); //*loginController
 
 app.controller('logoutController',function ($rootScope,$scope,$http,$location,$route) {
-  $http.post('logout',{}).finally(function() {
+  $http.post(AUTH_API_URL + 'logout',{}).finally(function() {
     $rootScope.authenticated = false;
     $location.path('/');
   });
