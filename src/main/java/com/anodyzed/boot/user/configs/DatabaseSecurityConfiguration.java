@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
@@ -29,23 +28,13 @@ public class DatabaseSecurityConfiguration extends WebSecurityConfigurerAdapter 
     authenticationManagerBuilder.userDetailsService(principalDetailsService);
   } //configure
 
-//  @Override
-//  protected void configure (HttpSecurity http) throws Exception {
-//    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                      .and().authorizeRequests().antMatchers("/api/user/**").authenticated()
-//                      .and().httpBasic().realmName("User Registration System")
-//                      .and().csrf().disable();
-//  } //configure
-
   @Override
   protected void configure (HttpSecurity http) throws Exception {
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                      .and().httpBasic().realmName("User Registration System")
-                      .and().authorizeRequests()
-                            .antMatchers("/api/user/login.html","/api/user/home.html","/").permitAll()
-                            .anyRequest().authenticated()
-                      .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+    http.httpBasic().realmName("User Registration System")
+        .and().authorizeRequests()
+              .antMatchers("/","/templates/login.html","/templates/home.html","/scripts/*","/styles/*","/favicon.ico").permitAll()
+              .anyRequest().authenticated()
+        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
   } //configure
-
 
 } //*DatabaseSecurityConfiguration

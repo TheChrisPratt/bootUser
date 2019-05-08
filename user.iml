@@ -117,4 +117,11 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.ow2.asm:asm:5.0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.h2database:h2:1.4.197" level="project" />
   </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/src/main/resources/static" />
+      </list>
+    </option>
+  </component>
 </module>
